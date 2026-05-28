@@ -1,14 +1,14 @@
 FROM jellyfin/jellyfin:latest
 
-# Install fonts for Chinese characters display in metadata and subtitles
+# Install Noto CJK fonts for high-quality Chinese metadata and subtitle rendering
+# Note: fonts-noto-cjk-extra provides multiple weights and full character coverage
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    fonts-wqy-microhei \
-    fonts-wqy-zenhei \
-    xfonts-intl-chinese \
+    fonts-noto-cjk \
+    fonts-noto-cjk-extra \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Set environment variables for Chinese locale (optional but helpful)
+# Set environment variables for Chinese locale
 ENV LANG=zh_CN.UTF-8 \
     LANGUAGE=zh_CN:zh \
     LC_ALL=zh_CN.UTF-8
