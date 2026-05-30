@@ -4,8 +4,7 @@ on:
   push:
     branches: [ "master", "main" ]
     tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ "master", "main" ]
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
@@ -34,6 +33,10 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
+            type=ref,event=tag
+            type=sha
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -42,3 +45,4 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
