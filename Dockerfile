@@ -3,7 +3,6 @@ FROM jellyfin/jellyfin:10.11.10
 # Install Noto CJK fonts for high-quality Chinese metadata and subtitle rendering
 # Note: fonts-noto-cjk-extra provides multiple weights and full character coverage
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    fonts-noto-cjk \
     fonts-noto-cjk-extra \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
