@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Bundle extra subtitle fonts directly into the image.
 # Put .ttf/.otf/.ttc files under ./fonts/ in this repository.
 COPY fonts/ /usr/local/share/fonts/custom/
+COPY 90-jellyfin-danmaku-fonts.conf /etc/fonts/conf.d/90-jellyfin-danmaku-fonts.conf
 RUN fc-cache -f -v /usr/local/share/fonts/custom
 
 # Generate Chinese locale to ensure proper CJK sorting and character handling
