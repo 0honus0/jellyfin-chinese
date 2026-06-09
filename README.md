@@ -6,7 +6,6 @@ A Jellyfin Docker image based on the official repository with built-in support f
 - Based on official Jellyfin images.
 - Built-in Noto CJK fonts for Chinese metadata and subtitle rendering.
 - Bundles extra subtitle fonts from `fonts/` into `/usr/local/share/fonts/custom/` inside the image.
-- Includes open-source `Source Han Sans SC` fonts from Adobe for broad Chinese subtitle coverage.
 - Includes open-source `LXGW WenKai Screen` for softer, more readable danmaku-style Chinese subtitles.
 - Automated builds via GitHub Actions.
 
