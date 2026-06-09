@@ -5,17 +5,19 @@ FROM jellyfin/jellyfin:10.11.11
 RUN apt-get update && apt-get install -y --no-install-recommends \
     fontconfig \
     fonts-noto-cjk-extra \
+    locales \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Bundle extra subtitle fonts directly into the image.
 # Put .ttf/.otf/.ttc files under ./fonts/ in this repository.
 COPY fonts/ /usr/local/share/fonts/custom/
-RUN fc-cache -f -v /usr/local/share/fonts/custom || true
+RUN fc-cache -f -v /usr/local/share/fonts/custom
 
 # Generate Chinese locale to ensure proper CJK sorting and character handling
-RUN sed -i 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen && \
-    locale-gen
+RUN sed -i 's/# *zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen zh_CN.UTF-8 && \
+    update-locale LANG=zh_CN.UTF-8
 
 # Set environment variables for Chinese locale
 ENV LANG=zh_CN.UTF-8 \
