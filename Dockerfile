@@ -1,4 +1,4 @@
-FROM jellyfin/jellyfin:10.11.11
+FROM jellyfin/jellyfin:null
 
 # Install CJK fonts for high-quality Chinese metadata and subtitle rendering
 # Note: fonts-noto-cjk-extra provides multiple weights and full character coverage
